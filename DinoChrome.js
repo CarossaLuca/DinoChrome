@@ -34,3 +34,16 @@ window.onload = function(){				//permette la personalizzazione di css; grazie a 
 		}
 
 }
+
+function update() {
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}
