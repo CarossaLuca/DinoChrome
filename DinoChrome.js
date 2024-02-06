@@ -36,6 +36,10 @@ window.onload = function(){				//permette la personalizzazione di css; grazie a 
 }
 
 function update() {
+	requesAnimationFrame(update);
+	
+	context.drawImage(dinoImg, dino.x, dino,y, dino.width, dino.height);
+	
 	
 	
 	
