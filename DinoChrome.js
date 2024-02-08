@@ -18,6 +18,17 @@ let dino = {
 	width : dinoWidth,
 	height : dinoHeight
 }
+let cactusArray= [];
+let cactus1Width= 34;
+let cactus2Width= 69;
+let cactus3Width= 102;
+
+let cactusHeight= 70;
+let cactusX= 700; 
+let cactusY= boardHeight- cactusHeight;
+let cactus1Img;
+let cactus2Img;
+let cactus3Img;
 
 window.onload = function(){				//permette la personalizzazione di css; grazie a lui possiamo inserire elementi al momento giusto
 	board = document.getElementById("board");
@@ -32,7 +43,18 @@ window.onload = function(){				//permette la personalizzazione di css; grazie a 
 	dinoImg.onload = function(){
 	context.drawImage(dinoImg, dino.x, dino.y, dino.width, dino.height);
 		}
+	cactus1Img = new Image();
+	cactus1Img.src = "./img/cactus1.png";
 
+			cactus2Img = new Image();
+	cactus2.src = "./img/cactus2.png";
+
+
+			cactus3Img = new Image();
+	cactus3Img.src = "./img/cactus3.png";
+	
+	requesAnimationFrame(update);
+	setInterval(placeCactus, 1000); //definisce il tempo espresso in millesecondi
 }
 
 function update() {
@@ -40,14 +62,21 @@ function update() {
 	
 	context.drawImage(dinoImg, dino.x, dino,y, dino.width, dino.height);
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+}
+
+function placeCactus (){
+
+	let cactus{
+		img : null,
+		x: cactusX,
+		y: cactusY,
+		width: null,
+		height: cactusHeight
+
+	}
+	let placeCactusChance= Math.random();
+	if (placeCactusChance >.90){
+		cactus.img=cactus3Img;
+	}
+
 }
