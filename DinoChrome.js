@@ -30,7 +30,7 @@ let cactus1Img;
 let cactus2Img;
 let cactus3Img;
 
-window.onload = function(){				//permette la personalizzazione di css; grazie a lui possiamo inserire elementi al momento giusto
+window.onload = function(){				//al caricamento fa partire la funzione
 	board = document.getElementById("board");
 	board.height = boardHeight;
 	board.width = boardWidth;
@@ -38,7 +38,7 @@ window.onload = function(){				//permette la personalizzazione di css; grazie a 
 	//context.fillStyle = "green";
 	//context.fillRect(dino.x, dino.y, dino.width, dino.height);
 
-	dinoImg = new Image();
+	dinoImg = new Image();  //oggetto 
 	dinoImg.src = "./img/dino.png";
 	dinoImg.onload = function(){
 	context.drawImage(dinoImg, dino.x, dino.y, dino.width, dino.height);
@@ -53,20 +53,20 @@ window.onload = function(){				//permette la personalizzazione di css; grazie a 
 			cactus3Img = new Image();
 	cactus3Img.src = "./img/cactus3.png";
 	
-	requesAnimationFrame(update);
+	requestAnimationFrame(update);
 	setInterval(placeCactus, 1000); //definisce il tempo espresso in millesecondi
 }
 
 function update() {
-	requesAnimationFrame(update);
+	requestAnimationFrame(update);
 	
-	context.drawImage(dinoImg, dino.x, dino,y, dino.width, dino.height);
+	context.drawImage(dinoImg, dino.x, dino,y, dino.width, dino.height);  //metodo del context perchè c'è il punto
 	
 }
 
 function placeCactus (){
 
-	let cactus{
+	let cactus{						//struttura
 		img : null,
 		x: cactusX,
 		y: cactusY,
