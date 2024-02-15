@@ -31,7 +31,7 @@ let cactus2Img;
 let cactus3Img;
 
 //physics
-let velocityX = 8-; 
+let velocityX = -8;
 let velocityY = 0;
 let gravity = .4;
 
@@ -55,29 +55,37 @@ window.onload = function(){				//al caricamento fa partire la funzione
 	cactus1Img.src = "./img/cactus1.png";
 
 			cactus2Img = new Image();
-	cactus2.src = "./img/cactus2.png";
+	cactus2Img.src = "./img/cactus2.png";
 
 
 			cactus3Img = new Image();
 	cactus3Img.src = "./img/cactus3.png";
 	
-	requestAnimationFrame(update);
 	setInterval(placeCactus, 1000); //definisce il tempo espresso in millesecondi
+	requestAnimationFrame(update);
+	
+	document.addEventListener("Keydown", moveDino); 
 }
 
 function update() {
 	requestAnimationFrame(update);
 
+		if (gameOver) {
+		return;
+	}
+
 	context.clearRect(0, 0, board.width, board.height);
 
 	//dino
-	context.drawImage(dinoImg, dino.x, dino,y, dino.width, dino.height);  //metodo del context perchè c'è il punto
+	velocityY += gravity;
+	dino.y = Math.min(dino.y + velocityY, dinoY); 	//applica la gravità al dinosauro
+	context.drawImage(dinoImg, dino.x, dino.y, dino.width, dino.height);  //metodo del context perchè c'è il punto
 	
 	//cactus
-	for (let i = 0; 1< cactusArray.length; i++){
-		let cactus = cactusArray[i];
-		cactus.X += velocityX;
-		context.drawImage(cactus.img, cactus.x, cactus.y, cactus.width, cactus.height)
+	for (let i = 0; i< cactusArray.length; i++){
+		let cactusC = cactusArray[i];
+		cactusC.x += velocityX;
+		context.drawImage(cactusC.img, cactusC.x, cactusC.y, cactusC.width, cactusC.height);
 	}
 }
 
@@ -85,15 +93,25 @@ function moveDino(e){
 	if (gameOver) {
 		return;
 	}
+
+	if((e.code == "Space" || e.code == "ArrowUp" ) && dino.y == dinoY){
+		//jump
+		velocityY= -10;
+
+
+
+	}
 }
 
-function placeCactus (){
-	function moveDino(e){
-	if (gameOver) {
+function placeCactus(){
+
+		if (gameOver) {
 		return;
 	}
 
-	let cactus{						//struttura
+	
+
+	 let cactus={						//struttura
 		img : null,
 		x: cactusX,
 		y: cactusY,
@@ -108,12 +126,12 @@ function placeCactus (){
 		cactusArray.push(cactus);
 
 	}
-	else if (placeCactusChange > .70){
+	else if (placeCactusChance > .70){
 		cactus.img = cactus2Img;
 		cactus.width = cactus2Width;
 	}
-	else if (placeCactusChange > .50){
-		cactus.img = Cactus1Img;
+	else if (placeCactusChance > .50){
+		cactus.img = cactus1Img;
 		cactus.width = cactus1Width;
 		cactusArray.push(cactus);
 	}
