@@ -86,8 +86,24 @@ function update() {
 		let cactusC = cactusArray[i];
 		cactusC.x += velocityX;
 		context.drawImage(cactusC.img, cactusC.x, cactusC.y, cactusC.width, cactusC.height);
+		if (detectCollision(dino, cactus)) {
+			gameOver = true;
+			dinoImg.src = "./img/dino-dead.png";
+			dinoImg.onload = funtion() {
+				context.drawImage(dinoImg, dino.x, dino.y, dino.width, dino.height);
+
+
+		}
+
+
 	}
 }
+
+//score
+context.fillSyle="black";
+context.font="20px courier";
+score++;
+context.fillText(score, 5, 20);
 
 function moveDino(e){
 	if (gameOver) {
@@ -101,6 +117,18 @@ function moveDino(e){
 
 
 	}
+	else if (e.code == "ArrowDown" && dino.y == dinoY) {
+		//jump
+		velocityY = -10;
+
+
+	}
+	else if (e.code == "ArrowDown"  && dino.y == dinoY) {
+		//duck
+	}
+
+
+
 }
 
 function placeCactus(){
@@ -140,4 +168,11 @@ function placeCactus(){
 		cactusArray.shift(); //rimuovi il primo elemento dall'array in modo che l'array non cresca costantemente
 
 	}
+}
+
+function datectCollision(a, b) {
+	return a.x < b.x + b.width &&   //a's top left corner doesn't reach b's top right corner 
+	       a.x + a.width > b.x &&   //a's top right corner passes b's top left corner 
+	       a.y < b.y + b.height &&  //a's top left corner doesn't reach b's bottom left corner 
+	       a.y + a.height > b.y;    //a's bottom left corner passes b's top left corner 
 }
